@@ -1,0 +1,61 @@
+- function: profile
+  args:
+    axis: 0
+  name: z profile
+- function: profile
+  args:
+    axis: 1
+  name: x profile
+- function: profile
+  args:
+    axis: 2
+  name: y profile
+- function: calc_e_ratio
+  name: energy ratio
+  classifier: true
+- function: calc_occupancy
+  name: occupancy
+  classifier: true
+- function: calc_spectrum
+  args:
+    cut: 1.e-4
+  name: energy spectrum
+- function: mean_std
+  args:
+    axis: 0
+    get_std: false
+  name: z mean
+  classifier: true
+- function: mean_std
+  args:
+    axis: 1
+    get_std: false
+  name: x mean
+  classifier: true
+- function: mean_std
+  args:
+    axis: 2
+    get_std: false
+  name: y mean
+  classifier: true
+- function: mean_std
+  args:
+    axis: 0
+    get_std: true
+  name: z std
+  classifier: true
+- function: mean_std
+  args:
+    axis: 1
+    get_std: true
+  name: x std
+  classifier: true
+- function: mean_std
+  args:
+    axis: 2
+    get_std: true
+  name: y std
+  classifier: true
+- function: calc_e_parton
+  classifier: true
+  name: incident energy

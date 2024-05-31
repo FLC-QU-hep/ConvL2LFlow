@@ -1,0 +1,41 @@
+run_name: energy
+
+dataset:
+    class: EnergyDataset
+    data_file: data/gamma.h5
+    noise_mode: gaussian
+    noise_mean: 1.e-6
+    noise_std: 2.e-7
+    samples_trafo:
+        - [Clamp, 0., 1.]
+        - [LogIt, 1.e-6]
+    cond_trafo:
+        - [Log, 10., 1.e-6]
+        - [Affine, 2., -3.]
+    device: cuda
+
+dataloader:
+    batch_size: 1024
+    pin_memory: false
+
+flow:
+    class: MAFlow
+    num_blocks: 6
+    num_bins: 8
+    num_layers: 1
+    permutation: random
+    block: MADE
+    context_features_trafo: 1
+    hidden_features: 64
+    min_bin_height: 1.e-6
+    min_bin_width: 1.e-6
+    min_derivative: 1.e-6
+    dropout: 0.
+    use_embedding_net: false
+    use_residual_blocks: false
+    alpha: 1.e-6
+
+trainer:
+    learning_rate: 1.e-3
+    num_epochs: 200
+    scheduler: Exponential

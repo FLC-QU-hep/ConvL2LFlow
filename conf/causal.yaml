@@ -1,0 +1,54 @@
+run_name: shower
+
+dataset:
+    class: ShowerDataset
+    data_file: data/dataset_3.h5
+    noise_mode: uniform
+    noise_mean: 5.e-7
+    extra_noise_mode: log_normal
+    extra_noise_mean: -6.
+    extra_noise_std: 0.2
+    apply_cut_depos_energy: true
+    energy_threshold: 1.515e-5
+    samples_trafo:
+        - [NormLayer, 1.e-6]
+        - [Clamp, 0., 1.]
+        - [Log, 10., 1.e-7]
+        - [Affine, 0.14285714285714285, 1]
+        - [LogIt, 1.e-2]
+    cond_trafo:
+        - [Log, 10., 1.e-6]
+        - [Affine, 2., -3.]
+    cond_trafo2:
+        - [Log, 10., 1.e-6]
+        - [Affine, 1., 1.]
+    device: cuda
+    random_shift: true
+
+dataloader:
+    batch_size: 1024
+    pin_memory: false
+
+flow:
+    class: ConvFlow
+    squeeze: 2
+    num_blocks: 8
+    num_layers_cond: 5
+    out_features_embed: 8
+    coupling_block: rational_quadratic
+    use_act_norm: true
+    use_one_by_ones: true
+    subnet_args:
+      hidden: 32
+      cyclic_padding: true
+      downsamples:
+        - [3,5]
+        - [3,5]
+      identity_init: true
+
+trainer:
+    learning_rate: 6.e-4
+    num_epochs: 800
+    scheduler: OneCycle
+    grad_clip: 1.e+2
+    weight_decay: 0.0
