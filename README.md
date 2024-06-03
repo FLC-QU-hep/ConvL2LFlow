@@ -147,5 +147,5 @@ For questions/comments about the code contact: thorsten.buss@uni-hamburg.de
 This code was written for the paper:
 
 **Convolutional L2LFlows: Generating Accurate Showers in Highly Granular Calorimeters Using Convolutional Normalizing Flows**<br/>
-https://arxiv.org/abs/**<br/>
+[https://arxiv.org/abs/2405.20407](https://arxiv.org/abs/2405.20407)<br/>
 *Thorsten Buss, Frank Gaede, Gregor Kasieczka, Claudius Krause, David Shih*
